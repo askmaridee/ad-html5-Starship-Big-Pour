@@ -1,0 +1,329 @@
+<div id="hc_richmedia">
+	<script type="text/javascript">
+		if(!window.jQuery || !window.$) {
+			document.write('\x3Cscript src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript">\x3C/script>');
+		}
+	</script>
+	<script type="text/javascript" src="mraid.js"></script>
+	<style type="text/css">
+	body {margin: 0 auto;}
+	#hc_richmedia {
+		position:relative;
+		width:320px;
+		margin:0 auto;
+	}
+	#hc_richmedia .hc_initial_view {
+		position:relative;
+		z-index:1;
+	}
+	#hc_richmedia .hc_content {
+		position:relative;
+		width:320px;
+		height:300px;
+		text-align:center;
+		z-index:1;
+		background: url('38561.jpg') no-repeat top left #3194cb; 
+	}
+	#hc_richmedia .hc_closebtn {
+		position:absolute;
+		top:5px;
+		right:5px;
+		z-index:15;
+		cursor:pointer;
+	}
+	#hc_richmedia .hc_closebtn img {
+		position:relative;
+		z-index:20;
+	}
+	#hc_richmedia .hc_content h3 {
+		margin-top:0;
+	}
+	#hc_richmedia .hc_blockimg {
+		display:block;
+	}
+	a img {border: none;}
+	
+	/* custom styles */
+
+#pourcan_frame {
+    width: 320px;
+    height: 300px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    text-align: left;
+}
+#pourcan_frame .can {
+	width: 181px;
+	height: 300px;
+	background-image: url('38575.png');
+}
+#pourcan_frame .pint {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    z-index: 5;
+}
+#pourcan_frame .fill {
+    position: absolute;
+    height: 0;
+    width: 100%;
+    background: url("38566.png") no-repeat transparent right top;
+    bottom: 0;
+    right: 0;
+}
+
+#pourcan_frame .overpour {
+    position: absolute;
+    top: 216px;
+    left: 0;
+}
+
+#end_frame {
+    position: absolute;
+    width: 320px;
+    height: 300px;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+}
+
+	</style>
+	
+	<div class="hc_initial_view">		
+		<a href="#" id="hc_expand" onclick="jQuery.hc_rm.expand(event); return false;">		
+			<img class="hc_banner hc_blockimg" src="38565.jpg" style="width:320px;height:50px;" />
+		</a>	
+	</div><!-- end initial view content -->
+	
+	<div class="hc_content" id="hc_content" style="display:none;">
+	
+		<div class="hc_closebtn" id="hc_closebtn" style="display:none;" onclick="jQuery.hc_rm.collapse(event); return false;">
+			<img src="38564.png" />
+		</div>	
+		
+		<div id="pourcan_frame">
+			<div class="can" id="can_anim"></div>
+			<div class="pint"><img src="38563.png" /></div>
+			<div class="fill"></div>
+			<div class="overpour" style="display:none"><img src="38562.png" /></div>
+		</div>
+		
+		<div id="end_frame" style="display: none;">
+			<img src="38560.jpg" alt="Coors Light - the world's most refreshing can." />
+		</div>
+        
+		<div id="end_frame2" style="display: none;">
+			<a id="endlink" class="hc_ci" href="http://ad.doubleclick.net/ddm/clk/280685665;106082154;i" data-trackinglabel="click" target="_blank"><img src="38559.jpg" alt="Coors Light - the world's most refreshing can. Tap for more info." /></a>
+		</div>
+	
+		
+	</div><!-- end reveal content -->
+
+	<script type="text/javascript">
+		
+		/* DO NOT USE slashes for comments. */
+		/* use .toggle to reveal from left to right, down */
+		/* use .slideToggle to reveal from top to bottom */
+		/* any closing html tags must have the forward slash escaped,e.g. <\/div> */
+	
+		(function ($) {		
+			
+			var fifheight;
+					
+			$.hc_rm = {
+				getQP: function (p) {
+					if(window.location && typeof window.location.search === "string") {
+						var qArray = window.location.search.substr(1).split("&"),qParam,i;
+						for(i=0; i<qArray.length; i++) {
+							qParam = qArray[i].split("=");
+							if(qParam.length === 2 && qParam[0] === p) {
+								return unescape(qParam[1]);
+							}
+						}
+					}
+					return false;
+				},
+				/*getSQP: function(p) {
+					var scriptSrc = $("script[src*='as.aug.me']").attr('src');
+					var tmp = scriptSrc.split("?");
+					if(tmp.length > 1) {
+						var qArray = tmp[1].split("&"),qParam,i;
+						for(i=0; i<qArray.length; i++) {
+							qParam = qArray[i].split("=");
+							if(qParam.length === 2 && qParam[0] === p) {
+								return unescape(qParam[1]);
+							}
+						}
+					}
+					return false;
+				},*/
+				expand: function (e) {				
+					if (!e) { e = window.event; }
+					e.cancelBubble = true;
+					if (e.stopPropagation) e.stopPropagation();	
+					/* FIF support */
+					if(window.inDapIF === true) {
+						$("iframe",parent.document).each(function(iel, el){
+							if(el.contentWindow === window) {
+								fifheight = $(el).css("height");
+								$(el).css("height","300px");
+								return false;
+							}
+						});
+					}				
+					
+					/*$("#endlink").attr('href', 'http://ad.doubleclick.net/ddm/clk/280685665;106082154;i'+new Date().getTime()+'&mb=1&ck=1&on=<operator>');*/
+					
+					/* mraid function call */
+					if(typeof mraid !== "undefined") {
+						mraid.useCustomClose(true);
+						mraid.expand();
+					}					
+					/* animations for expand */
+					$("#hc_richmedia .hc_initial_view").hide();
+					$("#hc_richmedia .hc_content").show();
+					$("#hc_richmedia .hc_closebtn").show();
+				
+					start_pour();
+					
+					/* Hip expansion tracking */				
+					$("#hc_richmedia").append('<img src="#trk:expansion#?cb='+new Date().getTime()+'" style="position:absolute;height:1px;width:1px;" />');	
+					
+					/* 3rd party expansion tracker */
+     				/*if(this.getSQP('exp') !== false) {
+     					$("#hc_richmedia").append('<img src="'+decodeURIComponent(this.getSQP('exp'))+'&cb='+new Date().getTime()+'" style="position:absolute;height:1px;width:1px;" />');
+     				}*/
+     								
+					return false;
+				},
+				collapse: function(e) {
+					if (!e) { e = window.event; }
+					e.cancelBubble = true;
+					if (e.stopPropagation) e.stopPropagation();	
+					/* FIF support */
+					if(window.inDapIF === true) {
+						$("iframe",parent.document).each(function(iel, el){
+							if(el.contentWindow === window) {
+								$(el).css("height",fifheight);
+								return false;
+							}
+						});
+					}				
+					/* mraid function call */
+					if(typeof mraid !== "undefined") {
+						mraid.close();
+					}					
+					/* animations for collapse */
+					$("#hc_richmedia .hc_initial_view").show();
+					$("#hc_richmedia .hc_content").hide();
+					$("#hc_richmedia .hc_closebtn").hide();					
+					$("#hc_richmedia").append('<img src="#trk:collapse#?cb='+new Date().getTime()+'" style="position:absolute;height:1px;width:1px;" />');						
+					return false;													
+				},
+				engage: function(e) {
+					if (!e) { e = window.event; }
+					e.cancelBubble = true;
+					if (e.stopPropagation) e.stopPropagation();
+					$("#hc_richmedia").append('<img src="#trk:engage#?cb='+new Date().getTime()+'" style="position:absolute;height:1px;width:1px;" />');
+					return false;
+				}
+				
+			};
+			
+			var ad_status = "waiting";
+						
+			function start_pour() {
+					if (ad_status === "waiting") {
+						ad_status = "pouring";
+      					      					
+						var imageWidth=1086, 
+						imageHeight=300, 
+						xpos=0, 
+						ypos=0, 
+						index=0, 
+						numFrames = 6, 
+						frameSize= 181, 
+						div,
+						animation;
+				   
+						function init() {
+							div = document.getElementById('can_anim');
+							animation = setInterval(loop, 1000/14);
+						}	
+					    	   	
+				    
+						function loop() {
+							div.style.backgroundPosition = (-xpos)+"px "+(-ypos)+"px";
+						
+							xpos += frameSize;
+							index += 1;
+							
+							if (index >= numFrames) {
+								clearInterval(animation);
+								fill()
+							}
+							
+							
+						}
+						
+						function fill() {
+							$("#pourcan_frame div.fill").delay(1).animate({
+	          					height: "38%"
+	        				}, 4500);
+	        				
+	      					$("#pourcan_frame div.overpour").delay(5000).fadeIn(600);
+	      					
+	      					$("#pourcan_frame").delay(6500).fadeOut(800);
+	      					$("#end_frame").delay(6500).fadeIn(600);
+	      					$("#end_frame").delay(2500).fadeOut(600);
+	      					$("#end_frame2").delay(6500).fadeIn(600);
+						}
+						
+						init();
+    				}
+			};
+		}(jQuery));
+		
+		/* Add mraid lister */
+		if(typeof mraid !== "undefined") {
+			mraid.addEventListener("stateChange", handleStateChanges);
+		}
+		
+		/* Mraid Handle State Change */
+		function handleStateChanges() {
+
+			switch(mraid.getState()) {
+				case "expanded":
+					jQuery.hc_rm.expand();
+					break;
+				case "default":
+					jQuery.hc_rm.collapse();
+					break;
+			}
+			
+		}
+		
+		$(document).ready(function() {
+			$(".hc_ci").bind("click",function(e){
+				e.preventDefault();
+				e.stopPropagation();
+	
+				var label = $(this).data("trackinglabel");
+				var url = $(this).attr("href");
+				
+				var i = new Image();
+	
+				i.onload = function(){
+					window.location = url;
+				};
+
+				i.src = '#trk:'+label+'#?cb='+new Date().getTime();
+			});
+			
+			var i = new Image();
+			i.src = 'http://ad.doubleclick.net/ad/N4304.285074.HIPCRICKET.COM/B7993576;sz=1x1;ord='+new Date().getTime()+'?';
+		});
+	</script>
+	
+</div><!-- end required wrapper -->
